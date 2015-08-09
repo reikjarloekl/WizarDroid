@@ -50,19 +50,16 @@ public class WizardFlow {
 	}
 
     /**
-	 * Get the list of wizard flow steps which is cut off at the last step which is required and incomplete
-     * and the first step which doesn't allow to go back and is incomplete.
+	 * Get the list of wizard flow steps.
      * This method is designed to work directly with ViewPager.
 	 */
 	public List<Class<? extends WizardStep>> getSteps() {
-        List<Class<? extends WizardStep>> cutOffFlow = new ArrayList<Class<? extends WizardStep>>();
+        List<Class<? extends WizardStep>> flow = new ArrayList<>();
 
-        //Calculate the cut off step by finding the last step which is required and incomplete
         for (StepMetaData stepMetaData : this.steps) {
-            cutOffFlow.add(stepMetaData.getStepClass());
-            if (!stepMetaData.isCompleted() && stepMetaData.isRequired()) break;
+            flow.add(stepMetaData.getStepClass());
         }
-        return cutOffFlow;
+        return flow;
 	}
 
     /**

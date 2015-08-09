@@ -59,7 +59,12 @@ public abstract class WizardFragment extends Fragment implements Wizard.WizardCa
             focusedWindowChild = new View(getActivity());
         mgr.hideSoftInputFromWindow(focusedWindowChild.getWindowToken(), 0);
     }
-    
+
+    /**
+     * Event called after the state (completed) of a step was changed.
+     */
+    public abstract void onStepStateChanged();
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

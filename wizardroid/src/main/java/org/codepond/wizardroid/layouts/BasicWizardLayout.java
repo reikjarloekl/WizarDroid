@@ -95,11 +95,10 @@ public abstract class BasicWizardLayout extends WizardFragment implements View.O
     }
 
     /**
-     * Event triggered after a step was changed, updating the button labels accordingly
+     * Event triggered after the state of a step was changed, updating the button labels accordingly
      */
     @Override
-    public void onStepChanged() {
-		super.onStepChanged();
+    public void onStepStateChanged() {
         updateWizardControls();
     }
 

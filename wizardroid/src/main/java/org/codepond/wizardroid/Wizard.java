@@ -37,6 +37,11 @@ public class Wizard implements Disposable, Subscriber {
          * Event called after a step was changed
          */
         public void onStepChanged();
+
+        /**
+         * Event called after the state (completed) of a step was changed.
+         */
+        public void onStepStateChanged();
     }
 
 	private static final boolean DEBUG = false;
@@ -115,6 +120,7 @@ public class Wizard implements Disposable, Subscriber {
 						break;
 					case ViewPager.SCROLL_STATE_SETTLING:
 						callbacks.onStepChanged();
+                        callbacks.onStepStateChanged();
 						break;
 					case ViewPager.SCROLL_STATE_IDLE:
 						if (mPreviousState == ViewPager.SCROLL_STATE_SETTLING) {
@@ -155,9 +161,8 @@ public class Wizard implements Disposable, Subscriber {
         // Check that the step is not already in this state to avoid spamming the viewpager
         if (wizardFlow.isStepCompleted(stepPosition) != isComplete) {
             wizardFlow.setStepCompleted(stepPosition, isComplete);
-            mPager.getAdapter().notifyDataSetChanged();
             //Refresh the UI
-            callbacks.onStepChanged();
+            callbacks.onStepStateChanged();
         }
     }
 
